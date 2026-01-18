@@ -16,6 +16,7 @@ impl<T> Node<T> {
     }
 }
 
+#[derive(Debug)]
 pub struct LinkedList<T> {
     pub len: usize,
     pub head: Option<NonNull<Node<T>>>,
@@ -53,5 +54,42 @@ impl<T> LinkedList<T> {
 
         self.head = node_ptr;
         self.len += 1;
+    }
+
+    pub fn insert_at_tail(&mut self, obj: T) {
+        let mut node = Box::new(Node::new(obj));
+        node.next = None;
+        node.prev = self.tail;
+
+        let node_ptr = NonNull::new(Box::into_raw(node));
+
+        match self.tail {
+            None => self.head = node_ptr,
+            Some(tail_ptr) => unsafe { (*tail_ptr.as_ptr()).next = node_ptr },
+        }
+    }
+
+    pub fn delete_head(&mut self) {
+        if self.len == 0 {
+            return None;
+        }
+
+        self.head.map(|head_ptr| unsafe {
+            let old_head = Box::from_raw(head_ptr.as_ptr());
+        });
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::LinkedList;
+
+    #[test]
+    fn insert_at_head_works() {
+        let mut list = LinkedList::<i32>::new();
+        let second_val = 2;
+        list.insert_at_head(1);
+        list.insert_at_head(second_val);
+        println!("Linked List is {:?}", list);
     }
 }
