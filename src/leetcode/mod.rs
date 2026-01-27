@@ -1,6 +1,9 @@
+mod group_anagrams;
 mod happy_number;
 mod length_of_last_word;
+mod letter_combinations;
 mod longest_common_prefix;
 mod plus_one;
+mod product_except_self;
 mod remove_element;
 mod top_k_frequent_elements;
