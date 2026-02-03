@@ -1,3 +1,5 @@
+/* https://codeforces.com/problemset/problem/71/A */
+
 use std::io::{self, BufRead};
 
 fn main() {
