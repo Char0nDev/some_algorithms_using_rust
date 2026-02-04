@@ -1,3 +1,6 @@
+mod atio;
+mod check_straight_line;
+mod get_decimal_value;
 mod group_anagrams;
 mod happy_number;
 mod length_of_last_word;
